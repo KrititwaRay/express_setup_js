@@ -11,18 +11,19 @@ const userMiddleware = new UserMiddleware();
 import { CommonMiddleware } from "../../../helper/common_middleware.js";
 const commonMiddleware = new CommonMiddleware();
 
-let middleware = [
-    userMiddleware.signupValidationRule(),
-    commonMiddleware.checkErrors
-];
+let middleware = [];
+
 
 import { UserController } from "../controller/user.controller.js";
 const userController = new UserController();
 
-
-
-
-router.route('/signup').post(middleware, userController.signup).all(methodNotAllowed)
-
+middleware = [
+    userMiddleware.signupValidationRule(),
+    commonMiddleware.checkErrors
+]
+router
+    .route('/signup')
+    .post(middleware, userController.signup)
+    .all(methodNotAllowed)
 
 export const user_routing = router;
