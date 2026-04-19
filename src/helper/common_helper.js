@@ -66,4 +66,25 @@ export class CommonHelper {
         return successObj;
     }
 
+    notAuthorized(res, msg) {
+
+        let response_data = {
+            status: {
+                message: msg,
+                action_status: false
+            }
+        }
+        res.status(global.httpCodes.HTTP_RESPONSE_UNAUTHORIZED);
+        res.send({ response: this.capitalizeFirstLetter(response_data) });
+    }
+
+    notFoundResponse = (msg) => {
+        let responseObj = {
+            status: false,
+            status_code: global.httpCodes.HTTP_RESPONSE_NOT_FOUND,
+            message: msg
+        }
+        return responseObj;
+    }
+
 }
